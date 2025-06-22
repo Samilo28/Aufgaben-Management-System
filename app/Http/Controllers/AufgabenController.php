@@ -27,7 +27,7 @@ class AufgabenController extends Controller
             'status' => 'required|in:todo,in_progress,done',
         ]);
 
-        return Aufgabe::create($validated);
+        return $request->user()->aufgaben()->create($validated);
     }
 
     /**
