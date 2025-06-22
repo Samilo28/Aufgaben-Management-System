@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Aufgaben;
+use App\Models\Aufgabe;
 use Illuminate\Http\Request;
 
 class AufgabenController extends Controller
@@ -13,7 +13,7 @@ class AufgabenController extends Controller
      */
     public function index()
     {
-        return Aufgaben::all();
+        return Aufgabe::all();
     }
 
     /**
@@ -27,13 +27,13 @@ class AufgabenController extends Controller
             'status' => 'required|in:todo,in_progress,done',
         ]);
 
-        return Aufgaben::create($validated);
+        return $request->user()->aufgaben()->create($validated);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Aufgaben $aufgabe): Aufgaben
+    public function show(Aufgabe $aufgabe): Aufgabe
     {
         return $aufgabe;
     }
@@ -41,12 +41,12 @@ class AufgabenController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Aufgaben $aufgabe): Aufgaben
+    public function update(Request $request, Aufgabe $aufgabe): Aufgabe
     {
         $validated = $request->validate([
-            'title' => 'sometimes|required|max:255',
-            'description' => 'sometimes|required',
-            'status' => 'sometimes|required|in:todo,in_progress,done',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'status' => 'required|in:todo,in_progress,done',
         ]);
 
         $aufgabe->update($validated);
@@ -57,7 +57,7 @@ class AufgabenController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Aufgaben $aufgabe)
+    public function destroy(Aufgabe $aufgabe)
     {
         $aufgabe->delete();
 
