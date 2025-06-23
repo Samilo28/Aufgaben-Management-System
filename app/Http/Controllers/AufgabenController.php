@@ -59,8 +59,9 @@ class AufgabenController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Aufgabe $aufgabe)
+    public function destroy($id)
     {
+        $aufgabe = Aufgabe::findOrFail($id);
         $aufgabe->delete();
 
         return response()->noContent();
