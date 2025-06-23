@@ -41,17 +41,19 @@ class AufgabenController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Aufgabe $aufgabe): Aufgabe
+    public function update(Request $request, $id)
     {
+        $aufgabe = Aufgabe::find($id);
+
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'status' => 'required|in:todo,in_progress,done',
         ]);
 
-        $aufgabe->update($validated);
+        $result = $aufgabe->update($validated);
 
-        return $aufgabe;
+        return response()->json($aufgabe->fresh());
     }
 
     /**
