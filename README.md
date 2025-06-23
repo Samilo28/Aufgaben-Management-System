@@ -85,7 +85,7 @@ Mögliche Status-Werte: todo, in_progress, done
 
 Tests
 ------
-Es wurden PHPUnit-Tests für die wichtigsten API-Funktionen (Erstellung, Aktualisierung) erstellt.
+Es wurden PHPUnit-Tests für die wichtigsten API-Funktionen (Erstellung, Aktualisierung, Löschung) erstellt.
 
 Testausführung:
 
