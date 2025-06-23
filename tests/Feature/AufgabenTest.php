@@ -60,4 +60,24 @@ class AufgabenTest extends TestCase
             'status' => 'in_progress',
         ]);
     }
+
+    #[Test] public function deleteTaskTest()
+    {
+        $user = User::factory()->create();
+
+        $aufgabe = Aufgabe::factory()->for($user)->create([
+            'title' => 'Test Aufgabe',
+            'description' => 'Test Beschreibung',
+            'status' => 'todo',
+        ]);
+
+        $response = $this->actingAs($user)
+            ->deleteJson("/api/aufgaben/{$aufgabe->id}");
+
+        $response->assertNoContent(); // 204
+
+        $this->assertDatabaseMissing('aufgaben', [
+            'id' => $aufgabe->id,
+        ]);
+    }
 }
