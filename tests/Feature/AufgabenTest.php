@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Aufgabe;
@@ -11,8 +12,7 @@ class AufgabenTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function createTaskTest()
+    #[Test] public function createTaskTest()
     {
         $user = User::factory()->create();
 
@@ -33,8 +33,7 @@ class AufgabenTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function updateTaskTest()
+    #[Test] public function updateTaskTest()
     {
         $user = User::factory()->create();
 
@@ -63,8 +62,7 @@ class AufgabenTest extends TestCase
     }
 
     //TODO: Not Working properly!
-    /** @test */
-    public function deleteTaskTest()
+    #[Test] public function deleteTaskTest()
     {
         $user = User::factory()->create();
 
